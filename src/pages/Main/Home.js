@@ -5,43 +5,71 @@ import { toggleBrand, toggleStock } from '../../redux/actions/filterAction';
 import getProductData from '../../redux/thunk/products/getProducts';
 
 const Home = () => {
+    const [update, setUpdate] = useState("");
     const products = useSelector((state) => state.product.products);
     const filters = useSelector((state) => state.filter.filters);
-    const {brands, stock} = filters;
+    const { brands, stock } = filters;
     const dispatch = useDispatch();
 
     useEffect(() => {
-       dispatch(getProductData());
-    },[dispatch]);
+        dispatch(getProductData());
+    }, [dispatch]);
 
     const activeClass = "text-white  bg-indigo-500 border-white";
 
     let content;
 
-    if(products.length){
+    if (products.length) {
         content = products.map((product) => (
-            <ProductCard key={product._id} product={product}/>
+            <ProductCard key={product._id} product={product} />
         ))
     };
 
-    if(products.length && (stock || brands.length)){
+    const handleChange = (e) => {
+        setUpdate(e.target.value);
+      };
+
+    if (products.length && (stock || brands.length)) {
         content = products
-        .filter((product) => {
-          if(stock){
-            return product.status === true;
-          }
-          return product;
-        })
-        .filter((product) => {
-          if(brands.length) {
-            return brands.includes(product.brand);
-          }
-          return product;
-        })
-        .map((product) => (
-          <ProductCard key={product.model} product={product} />
-        ));
-      }
+            .filter((product) => {
+                if (stock) {
+                    return product.status === true;
+                }
+                return product;
+            })
+            .filter((product) => {
+                if (brands.length) {
+                    return brands.includes(product.brand);
+                }
+                return product;
+            })
+            .map((product) => (
+                <ProductCard key={product.model} product={product} />
+            ));
+    }
+
+    if (update === "firstUpload") {
+        content = products
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((product) => (
+                <ProductCard product={product} key={product._id}></ProductCard>
+            ));
+    }
+    if (update === "lastUpload") {
+        content = products
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .map((product) => (
+                <ProductCard product={product} key={product._id}></ProductCard>
+            ));
+    }
+    if (update === "firstUpload") {
+        content = products
+            .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            .map((product) => (
+                <ProductCard product={product} key={product._id}></ProductCard>
+            ));
+    }
+    console.log(update)
     return (
         <div className="max-w-7xl mx-auto my-4 px-2">
             <div className="flex justify-between mb-2">
@@ -69,8 +97,8 @@ const Home = () => {
                 </div>
                 <div className="py-1">
                     <select
-                        // onChange={handleChange}
-                        className="uppercase ml-1 px-2 h-full rounded-md -mt-[50px] outline-none"
+                        onChange={handleChange}
+                        className="ml-1 px-2 h-full rounded-md -mt-[50px] outline-none"
                     >
                         <option
                             defaultValue={null}
@@ -80,10 +108,10 @@ const Home = () => {
                         >
                             Sort By
                         </option>
-                        <option value={"firstUpload"} className="uppercase">
+                        <option value={"firstUpload"}>
                             First Upload
                         </option>
-                        <option value={"lastUpload"} className="uppercase">
+                        <option value={"lastUpload"}>
                             Last Upload
                         </option>
                     </select>
