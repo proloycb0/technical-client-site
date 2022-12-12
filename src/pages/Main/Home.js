@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../../components/ProductCard';
+import getProductData from '../../redux/thunk/products/getProducts';
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
+    const products = useSelector((state) => state.product.products);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch("http://localhost:5000/products")
-        .then(res => res.json())
-        .then(data => setProducts(data.data))
-    },[])
+       dispatch(getProductData());
+    },[dispatch]);
+    
     let content;
 
     if(products.length){
