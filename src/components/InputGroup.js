@@ -23,10 +23,11 @@ const InputGroup = ({ updateProduct, setUpdateProduct }) => {
       ],
       spec: [data.spec],
     };
-    if (updateProduct !== undefined)
-      dispatch(updateProducts(updatedProduct, updateProduct._id, reset));
+    if (updateProduct !== undefined){
+        dispatch(updateProducts(updatedProduct, updateProduct._id, reset));
+    }
+     
 
-    if (updateProduct === undefined) dispatch((updatedProduct, reset));
     setUpdateProduct(null)
   };
 
