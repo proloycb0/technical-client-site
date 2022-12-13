@@ -1,4 +1,4 @@
-import { GET_CONTENT, READING_HISTORY } from "../actionTypes/actionTypes";
+import { GET_CONTENT, READING_HISTORY, UPDATE_CONTENT } from "../actionTypes/actionTypes";
 
 
 const initialState = {
@@ -33,6 +33,14 @@ const productReducer = (state = initialState, action) => {
                     readingHistory: [action.payload, ...state.readingHistory],
                 };
             };
+            case UPDATE_CONTENT:
+                const oldProduct = state.products.filter(
+                  (product) => product._id !== action.payload.id
+                );
+                return {
+                  ...state,
+                  products: [...oldProduct, action.payload.product],
+                };
 
         default:
             return state;

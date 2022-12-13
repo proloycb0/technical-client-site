@@ -1,4 +1,4 @@
-import { GET_CONTENT, READING_HISTORY } from "../actionTypes/actionTypes";
+import { GET_CONTENT, READING_HISTORY, UPDATE_CONTENT } from "../actionTypes/actionTypes";
 
 export const getContent = (products) => {
     return {
@@ -12,3 +12,9 @@ export const addToReadingHistory = (product) => {
         payload: product,
     };
 };
+export const updateContent = (product, id) => {
+    return {
+      type: UPDATE_CONTENT,
+      payload: { product, id },
+    };
+  };

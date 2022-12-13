@@ -20,19 +20,19 @@ const routes = createBrowserRouter([
                 path: "/readingHistory",
                 element: <ReadingHistory />,
             },
-        ],
-    },
-    {
-        path: "/dashboard",
-        element: <Dashboard />,
-        children: [
             {
                 path: "/dashboard",
-                element: <ProductList />,
-            },
-            {
-                path: "addProduct",
-                element: <AddProduct />
+                element: <Dashboard />,
+                children: [
+                    {
+                        path: "/dashboard",
+                        element: <ProductList />,
+                    },
+                    {
+                        path: "addProduct",
+                        element: <AddProduct />
+                    },
+                ],
             },
         ],
     },
