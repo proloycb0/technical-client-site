@@ -6,7 +6,7 @@ const getProductData = () => {
         const data = await res.json();
 
         if(data.data.length) {
-            dispatch(getContent(data));
+            dispatch(getContent(data.data));
         }
     };
 };
