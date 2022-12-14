@@ -22,6 +22,11 @@ const InputGroup = ({ updateProduct, setUpdateProduct }) => {
         data.keyFeature4,
       ],
       spec: [...updateProduct.spec],
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+      timestamps: true,
     };
     if (updateProduct !== undefined) {
       dispatch(updateProducts(updatedProduct, updateProduct._id, reset));
