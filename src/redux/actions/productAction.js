@@ -1,4 +1,4 @@
-import { ADD_CONTENT, GET_CONTENT, READING_HISTORY, UPDATE_CONTENT } from "../actionTypes/actionTypes";
+import { ADD_CONTENT, DELETE_CONTENT, GET_CONTENT, READING_HISTORY, UPDATE_CONTENT } from "../actionTypes/actionTypes";
 
 export const getContent = (products) => {
     return {
@@ -20,7 +20,13 @@ export const addToReadingHistory = (product) => {
 };
 export const updateContent = (product, id) => {
     return {
-      type: UPDATE_CONTENT,
-      payload: { product, id },
+        type: UPDATE_CONTENT,
+        payload: { product, id },
     };
-  };
+};
+export const deleteContent = (id) => {
+    return {
+        type: DELETE_CONTENT,
+        payload: id,
+    };
+};

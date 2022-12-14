@@ -10,9 +10,11 @@ const AddProduct = () => {
     const submit = (data) => {
         const product = {
             model: data.model,
+            image: data.image,
             brand: data.brand,
             status: data.status === "true" ? true : false,
             price: data.price,
+            rating: data.rating,
             keyFeature: [
                 data.keyFeature1,
                 data.keyFeature2,
@@ -20,6 +22,11 @@ const AddProduct = () => {
                 data.keyFeature4,
             ],
             spec: [],
+            createdAt: {
+                type: Date,
+                default: Date.now,
+            },
+            timestamps: true,
         };
 
         console.log(product);
@@ -60,6 +67,12 @@ const AddProduct = () => {
                     </label>
                     <input type='text' name='price' id='price' {...register("price")} />
                 </div>
+                <div className='flex flex-col w-full max-w-xs'>
+                    <label className='mb-2' htmlFor='rating'>
+                        Rating
+                    </label>
+                    <input type='text' name='rating' id='rating' {...register("rating")} />
+                </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
                     <h1 className='mb-3'>Availability</h1>
@@ -88,18 +101,6 @@ const AddProduct = () => {
                             </label>
                         </div>
                     </div>
-                </div>
-                <div className='flex flex-col w-full max-w-xs'>
-                    <label className="mb-2" htmlFor="spec">
-                        Spec
-                    </label>
-                    <textarea
-                        className="h-20"
-                        type="text"
-                        name="spec"
-                        id="spec"
-                        {...register("spec")}
-                    />
                 </div>
                 <div className='flex flex-col w-full max-w-xs'>
                     <label className='mb-2' htmlFor='keyFeature1'>

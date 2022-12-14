@@ -4,7 +4,7 @@ const updateProducts = (product, id, reset) => {
   console.log(product);
   return async (dispatch, getState) => {
     const res = await fetch(
-      `http://localhost:5000/product/${id}`,
+      `https://technical-server-site.onrender.com/product/${id}`,
       {
         method: "PUT",
         headers: {
@@ -15,13 +15,9 @@ const updateProducts = (product, id, reset) => {
     );
     const data = await res.json();
     console.log(data);
-    if (data.status === "Fail") {
-    //   toast.error(data.error);
-    }
 
     if (data.data.acknowledged) {
       reset();
-    //   toast.success("Product Updated successfully.");
       dispatch(updateContent(product, id));
     }
   };

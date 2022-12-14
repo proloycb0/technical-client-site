@@ -2,7 +2,7 @@ import { addContent } from "../../actions/productAction";
 
 const addProduct = (product) => {
     return async (dispatch, getState) => {
-        const res = await fetch("http://localhost:5000/product", {
+        const res = await fetch("https://technical-server-site.onrender.com/product", {
             method: 'POST',
             body: JSON.stringify(product),
             headers: {

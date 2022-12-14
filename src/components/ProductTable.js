@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BiTrash, BiEdit } from "react-icons/bi";
 import { useDispatch } from 'react-redux';
+import deleteProduct from '../redux/thunk/products/deleteProduct';
 import InputGroup from './InputGroup';
 
 const ProductTable = ({ product }) => {
@@ -43,9 +44,9 @@ const ProductTable = ({ product }) => {
                         <label onClick={() => setUpdateProduct(product)} htmlFor="update-modal">
                             <BiEdit className="w-5 h-5 mr-3 btn btn-xs p-0 border-none text-gray-800 bg-white hover:bg-white hover:border-none"></BiEdit>
                         </label>
-                        <label htmlFor="modal-delete">
+                        <button onClick={() => dispatch(deleteProduct(_id))}>
                             <BiTrash className="w-5 h-5 text-red-500 btn btn-xs p-0 border-none bg-white hover:bg-white hover:border-none"></BiTrash>
-                        </label>
+                        </button>
                     </div>
                 </td>
             </tr>
@@ -56,6 +57,7 @@ const ProductTable = ({ product }) => {
                     <div className="modal">
                         <div className="modal-box w-11/12 max-w-5xl">
                             <label
+                                onClick={() => setUpdateProduct(null)}
                                 htmlFor="update-modal"
                                 className="btn btn-sm btn-circle absolute right-2 top-2"
                             >
@@ -71,31 +73,6 @@ const ProductTable = ({ product }) => {
                     </div>
                 </>
             }
-            {/* delete modal */}
-            <input type="checkbox" id="modal-delete" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box relative">
-                    <label
-                        htmlFor="modal-delete"
-                        className="btn btn-sm btn-circle absolute right-2 top-2"
-                    >
-                        ✕
-                    </label>
-                    <h3 className="text-lg font-bold text-red-500">
-                        Are You sure that you want to delete this product?
-                    </h3>
-                    <p className="py-4">
-                        <span className="font-bold">Product Name:</span>{" "}
-                        <span className="text-purple-700"> {model}</span>
-                    </p>
-                    <button
-                        // onClick={() => dispatch(deleteProduct(product._id))}
-                        className="float-right btn btn-sm bg-red-500 text-white"
-                    >
-                        Delete
-                    </button>
-                </div>
-            </div>
         </>
     );
 };

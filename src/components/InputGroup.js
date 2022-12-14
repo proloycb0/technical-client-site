@@ -21,12 +21,12 @@ const InputGroup = ({ updateProduct, setUpdateProduct }) => {
         data.keyFeature3,
         data.keyFeature4,
       ],
-      spec: [data.spec],
+      spec: [...updateProduct.spec],
     };
-    if (updateProduct !== undefined){
-        dispatch(updateProducts(updatedProduct, updateProduct._id, reset));
+    if (updateProduct !== undefined) {
+      dispatch(updateProducts(updatedProduct, updateProduct._id, reset));
     }
-     
+
 
     setUpdateProduct(null)
   };
@@ -192,8 +192,8 @@ const InputGroup = ({ updateProduct, setUpdateProduct }) => {
             Submit
           </button>
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 
